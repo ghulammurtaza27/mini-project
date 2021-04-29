@@ -11,7 +11,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from "../features/userSlice"
+import { login } from "../features/userSlice";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice"
+
 
 
 
@@ -58,6 +61,8 @@ export default function Login() {
  
   const dispatch = useDispatch();
 
+  const user = useSelector(selectUser);
+
 	const handleSubmit = e => {
     e.preventDefault();
 
@@ -67,11 +72,22 @@ export default function Login() {
       username: username,
       password: password,
       loggedIn: true,
-      admin:true
+      admin:false
     }))
 
+    if(user) {
+      if(user.admin) {
+        console.log(user);
+        console.log(user.admin);
+        history.push('/user-list')
+      }
+      else {
+        history.push('/user')
+      }
+    }
+  
     
-    history.push('/user-list')
+   
 
     
     
