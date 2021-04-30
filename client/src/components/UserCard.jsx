@@ -25,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
 export default function UserCard(props) {
 
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-
-  const classes = useStyles();
   const history = useHistory();
 
 
