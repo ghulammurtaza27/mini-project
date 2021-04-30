@@ -3,6 +3,9 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
+import axios from "axios";
+import { useHistory } from 'react-router-dom';
+import { login } from "../features/userSlice";
 
 
 
@@ -25,11 +28,24 @@ export default function UserCard(props) {
   const user = useSelector(selectUser);
 
   const classes = useStyles();
+  const history = useHistory();
 
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log("clicked", props.user.id);
+    axios.get(`/api/users/${props.user.id}`)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(login({
+          id: res.data.id,
+          username: res.data.username,
+          password: res.data.password,
+          age: res.data.age,
+          admin: res.data.is_admin ? true : false
+        }))
+        history.push('/user')
+      })
   }
 
   

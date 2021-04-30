@@ -9,7 +9,8 @@ module.exports = ({
     getUserByEmail,
     addUser,
     getUsersPosts,
-    updatePassword
+    updatePassword,
+    getUserById
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
@@ -19,6 +20,8 @@ module.exports = ({
                 error: err.message
             }));
     });
+
+    
 
     router.put('/update', (req, res) => {
         const { password, id } = req.body;
@@ -67,6 +70,15 @@ module.exports = ({
             }));
 
     })
+
+    router.get('/:id', (req, res) => {
+        const { id } = req.params;
+        getUserById(id)
+            .then((users) => res.json(users))
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
 
     return router;
 };
