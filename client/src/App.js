@@ -13,9 +13,8 @@ const App = () => {
 
   const {
         state
-    } = useApplicationData();
-      const userList = state.users.map((userin) => (<li key={userin.id} > {userin.username} {userin.password} {`${userin.is_admin}`} {userin.age} </li>
-  ));
+  } = useApplicationData();
+
   return (<div className="App" >
     <Router>
       <Switch>
@@ -24,7 +23,6 @@ const App = () => {
       </Route>
       <Route path="/user-list" exact>
         <h1> Users </h1>
-        <ul> {userList} </ul>
         <UserList users={state.users}/>
       </Route>
       <Route path="/user" exact>

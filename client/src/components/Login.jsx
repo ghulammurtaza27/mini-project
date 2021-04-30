@@ -53,19 +53,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const userInfo = [{
-  username: 'test',
-  password: 'test',
-  admin: true,
-  age: 28
-},
-{
-  username: 'test1',
-  password: 'test1',
-  admin: false,
-  age: 27
-},
-];
+// const userInfo = [{
+//   username: 'test',
+//   password: 'test',
+//   admin: true,
+//   age: 28
+// },
+// {
+//   username: 'test1',
+//   password: 'test1',
+//   admin: false,
+//   age: 27
+// },
+// ];
 
 export default function Login() {
   // const [open, setOpen] = React.useState(false);
@@ -84,28 +84,25 @@ export default function Login() {
     axios.get('/api/users')
       .then((res) => {
         console.log(res.data)
-        res.data.forEach((singleUser) => {
-          if(singleUser.username === username) {
-            if(singleUser.password === password) {
-              console.log("this is the check",singleUser.is_admin)
-              dispatch(login({
-                id: singleUser.id,
-                username: username,
-                password: password,
-                age: singleUser.age,
-                admin: singleUser.is_admin ? true : false
-              }))
-              if(user) {
-                if(user.admin) {
-                  history.push('/user-list')
-                }
-                else {
-                  history.push('/user')
-                }
+        for (let singleUser of res.data) {
+          if(singleUser.username === username && singleUser.password === password) {
+            dispatch(login({
+              id: singleUser.id,
+              username: username,
+              password: password,
+              age: singleUser.age,
+              admin: singleUser.is_admin ? true : false
+            }))
+            console.log('line 96 Login')
+              if(singleUser.is_admin) {
+                history.push('/user-list')
               }
-            }
+              else {
+                history.push('/user')
+              }
+              return; 
           }
-        })
+        }
       })
 
     
