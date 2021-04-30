@@ -8,11 +8,21 @@ module.exports = ({
     getUsers,
     getUserByEmail,
     addUser,
-    getUsersPosts
+    getUsersPosts,
+    updatePassword
 }) => {
     /* GET users listing. */
     router.get('/', (req, res) => {
         getUsers()
+            .then((users) => res.json(users))
+            .catch((err) => res.json({
+                error: err.message
+            }));
+    });
+
+    router.put('/update', (req, res) => {
+        const { password, id } = req.body;
+        updatePassword(password, id)
             .then((users) => res.json(users))
             .catch((err) => res.json({
                 error: err.message

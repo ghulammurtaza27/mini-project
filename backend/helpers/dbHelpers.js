@@ -34,6 +34,16 @@ module.exports = (db) => {
           .catch(err => err);
   }
 
+  const updatePassword = (password, id) => {
+    const query = {
+        text: `UPDATE users SET password = $1 WHERE id = $2 RETURNING *` ,
+        values: [password, id]
+    }
+    return db.query(query)
+        .then(result => result.rows[0])
+        .catch(err => err);
+}
+
   const getUsersPosts = () => {
       const query = {
           text: `SELECT users.id as user_id, first_name, last_name, email, posts.id as post_id, title, content
@@ -52,6 +62,7 @@ module.exports = (db) => {
       getUsers,
       getUserByEmail,
       addUser,
-      getUsersPosts
+      getUsersPosts,
+      updatePassword
   };
 };

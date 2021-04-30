@@ -13,7 +13,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from "../features/userSlice";
 import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice"
+import { selectUser } from "../features/userSlice";
+import axios from "axios";
 
 
 
@@ -80,30 +81,34 @@ export default function Login() {
 	const handleSubmit = e => {
     e.preventDefault();
 
-    console.log(username);
-
-    userInfo.forEach((singleUser) => {
-      if(singleUser.username === username) {
-        if(singleUser.password === password) {
-          dispatch(login({
-            username: username,
-            password: password,
-            age: singleUser.age,
-            admin: singleUser.admin
-          }))
-          if(user) {
-            if(user.admin) {
-              console.log(user);
-              console.log(user.admin);
-              history.push('/user-list')
-            }
-            else {
-              history.push('/user')
+    axios.get('/api/users')
+      .then((res) => {
+        console.log(res.data)
+        res.data.forEach((singleUser) => {
+          if(singleUser.username === username) {
+            if(singleUser.password === password) {
+              console.log("this is the check",singleUser.is_admin)
+              dispatch(login({
+                id: singleUser.id,
+                username: username,
+                password: password,
+                age: singleUser.age,
+                admin: singleUser.is_admin ? true : false
+              }))
+              if(user) {
+                if(user.admin) {
+                  history.push('/user-list')
+                }
+                else {
+                  history.push('/user')
+                }
+              }
             }
           }
-        }
-      }
-    })
+        })
+      })
+
+    
 
     
 

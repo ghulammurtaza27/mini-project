@@ -14,7 +14,7 @@ const App = () => {
         state,
         dispatch
     } = useApplicationData();
-      const userList = state.users.map((userin) => (<li key={userin.id} > {userin.first_name} {userin.last_name} {userin.email} </li>
+      const userList = state.users.map((userin) => (<li key={userin.id} > {userin.username} {userin.password} {`${userin.is_admin}`} {userin.age} </li>
   ));
   return (<div className="App" >
     <Router>
