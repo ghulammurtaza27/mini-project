@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -52,8 +52,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const userInfo = [{
+  username: 'test',
+  password: 'test',
+  admin: true,
+  age: 28
+},
+{
+  username: 'test1',
+  password: 'test1',
+  admin: false,
+  age: 27
+},
+];
+
 export default function Login() {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 	const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const classes = useStyles();
@@ -68,30 +82,33 @@ export default function Login() {
 
     console.log(username);
 
-    dispatch(login({
-      username: username,
-      password: password,
-      loggedIn: true,
-      admin:false
-    }))
-
-    if(user) {
-      if(user.admin) {
-        console.log(user);
-        console.log(user.admin);
-        history.push('/user-list')
+    userInfo.forEach((singleUser) => {
+      if(singleUser.username === username) {
+        if(singleUser.password === password) {
+          dispatch(login({
+            username: username,
+            password: password,
+            age: singleUser.age,
+            admin: singleUser.admin
+          }))
+          if(user) {
+            if(user.admin) {
+              console.log(user);
+              console.log(user.admin);
+              history.push('/user-list')
+            }
+            else {
+              history.push('/user')
+            }
+          }
+        }
       }
-      else {
-        history.push('/user')
-      }
-    }
-  
-    
-   
+    })
 
     
+
     
-    
+
     
   }
 

@@ -2,14 +2,19 @@ import './App.css';
 import useApplicationData from "./hooks/useApplicationData";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
+import UserDetail from "./components/UserDetail";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice"
 
 
 const App = () => {
-    const {
+  const user = useSelector(selectUser);
+
+  const {
         state,
         dispatch
     } = useApplicationData();
-      const userList = state.users.map((user) => (<li key={user.id} > {user.first_name} {user.last_name} {user.email} </li>
+      const userList = state.users.map((userin) => (<li key={userin.id} > {userin.first_name} {userin.last_name} {userin.email} </li>
   ));
   return (<div className="App" >
     <Router>
@@ -22,7 +27,10 @@ const App = () => {
         <ul> {userList} </ul>
       </Route>
       <Route path="/user" exact>
-        <h1> User Detail </h1>
+        <UserDetail user={user}>
+
+        </UserDetail>
+
       </Route>
       </Switch>
     </Router>
