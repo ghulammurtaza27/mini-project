@@ -3,6 +3,7 @@ import useApplicationData from "./hooks/useApplicationData";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import UserDetail from "./components/UserDetail";
+import UserList from "./components/UserList";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice"
 
@@ -11,8 +12,7 @@ const App = () => {
   const user = useSelector(selectUser);
 
   const {
-        state,
-        dispatch
+        state
     } = useApplicationData();
       const userList = state.users.map((userin) => (<li key={userin.id} > {userin.username} {userin.password} {`${userin.is_admin}`} {userin.age} </li>
   ));
@@ -25,6 +25,7 @@ const App = () => {
       <Route path="/user-list" exact>
         <h1> Users </h1>
         <ul> {userList} </ul>
+        <UserList users={state.users}/>
       </Route>
       <Route path="/user" exact>
         <UserDetail user={user}>
