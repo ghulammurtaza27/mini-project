@@ -22,7 +22,6 @@ const App = () => {
         <Login />  
       </Route>
       <Route path="/user-list" exact>
-        <h1> Users </h1>
         <UserList users={state.users}/>
       </Route>
       <Route path="/user" exact>
