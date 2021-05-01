@@ -1,4 +1,5 @@
 import React from 'react';
+import useApplicationData from "../hooks/useApplicationData";
 import UserCard from "./UserCard";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
@@ -18,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserList(props) {
 
+    const {
+      state
+  } = useApplicationData();
+
   const user = useSelector(selectUser);
 
   const classes = useStyles();
@@ -28,7 +33,7 @@ export default function UserList(props) {
        <Typography component="h2" variant="h2">
           Users
         </Typography>
-      { user && user.admin && props.users.map((user) => {
+      { user && user.admin && state.users.map((user) => {
       if(!user.is_admin) {
         return <UserCard key={user.id} user={user}/>
       }
