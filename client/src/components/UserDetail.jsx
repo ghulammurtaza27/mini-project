@@ -6,6 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axios from "axios";
 import { useDispatch } from 'react-redux';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions'
 
 import { updatePassword } from "../features/userSlice";
 
@@ -13,13 +16,15 @@ import { updatePassword } from "../features/userSlice";
 const useStyles = makeStyles((theme) => ({
  
   form: {
-    width: '60%', // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     background: 'linear-gradient(140deg, rgba(4,4,18,1) 0%, rgba(76,124,251,1) 100%)'
   },
+  root: {
+    width: '40vw'
+  }
 }));
 
 
@@ -53,11 +58,26 @@ export default function UserDetail(props) {
   
 
   return (
-    <div>
-      <h1>{user.username}</h1>
-      <h1>{user.password}</h1>
-      <h1>{user.age}</h1>
-      <h1>{user.admin ? 'Admin' : 'Not an Admin'}</h1>
+    <div className={classes.root}>
+      <Card>
+        <CardActionArea>
+          <h3>Username: {user.username}</h3>
+        </CardActionArea>
+        <CardActionArea>
+        <h3>Password: {user.password}</h3>
+        </CardActionArea>
+        <CardActionArea>
+        <h3>Age: {user.age}</h3>
+        </CardActionArea>
+        <CardActionArea>
+        <h3>Role: {user.admin ? 'Admin' : 'Regular User'}</h3>
+        </CardActionArea>
+        
+       
+        
+       
+      </Card>
+      
       <form className={classes.form} onSubmit={handleSubmit}>
         <TextField
           variant="outlined"

@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { useSelector } from "react-redux";
-import { selectUser } from "../features/userSlice";
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import { login } from "../features/userSlice";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import StarIcon from '@material-ui/icons/Star';
+
 
 
 
 const useStyles = makeStyles((theme) => ({
- 
-  form: {
-    width: '60%', // Fix IE 11 issue.
-    marginTop: theme.spacing(1),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-    background: 'linear-gradient(140deg, rgba(4,4,18,1) 0%, rgba(76,124,251,1) 100%)'
-  },
+  root: {
+    width: '100%',
+    maxWidth: 600,
+    backgroundColor: theme.palette.background.paper,
+  }
 }));
 
 
@@ -26,6 +26,7 @@ export default function UserCard(props) {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  const classes = useStyles();
 
 
   const handleSubmit = e => {
@@ -48,8 +49,13 @@ export default function UserCard(props) {
   
 
   return (
+    
     <div onClick={handleSubmit}>
-      {props.user.username} yo
+      <List component="nav" className={classes.root} aria-label="contacts">
+      <ListItem button>
+        <ListItemText primary={props.user.username} />
+      </ListItem>
+    </List>
     </div>
   );
 }

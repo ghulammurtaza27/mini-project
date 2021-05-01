@@ -16,7 +16,11 @@ export default function UserList(props) {
     
     <div>
       <h1> Users </h1>
-      { user && user.admin && props.users.map((user) => <UserCard key={user.id} user={user}/>)}
+      { user && user.admin && props.users.map((user) => {
+      if(!user.is_admin) {
+        return <UserCard key={user.id} user={user}/>
+      }
+      })}
     </div>
   );
 }
