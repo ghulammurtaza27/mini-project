@@ -17,13 +17,20 @@ const useStyles = makeStyles((theme) => ({
  
   form: {
     marginTop: theme.spacing(1),
+    width: '70vw'
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
     background: 'linear-gradient(140deg, rgba(4,4,18,1) 0%, rgba(76,124,251,1) 100%)'
   },
   root: {
-    width: '40vw'
+    width: '70vw'
+  },
+  container: {
+    display: 'flex',
+    flexDirection:'column',
+    justifyContent:"center",
+    alignItems:'center'
   }
 }));
 
@@ -58,8 +65,8 @@ export default function UserDetail(props) {
   
 
   return (
-    <div className={classes.root}>
-      <Card>
+    <div className={classes.container} >
+      <Card className={classes.root}>
         <CardActionArea>
           <h3>Username: {user.username}</h3>
         </CardActionArea>
@@ -72,10 +79,7 @@ export default function UserDetail(props) {
         <CardActionArea>
         <h3>Role: {user.admin ? 'Admin' : 'Regular User'}</h3>
         </CardActionArea>
-        
-       
-        
-       
+
       </Card>
       
       <form className={classes.form} onSubmit={handleSubmit}>
