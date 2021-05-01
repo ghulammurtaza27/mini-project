@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDispatch } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
+import { Redirect } from "react-router-dom";
 
 
 import { updatePassword } from "../features/userSlice";
@@ -64,7 +65,7 @@ export default function UserDetail(props) {
 
   
 
-  return (
+  if (user) {return (
     <div className={classes.container} >
       <Card className={classes.root}>
         <CardActionArea>
@@ -108,5 +109,14 @@ export default function UserDetail(props) {
       </form>
     </div>
   
+  )};
+
+  return (
+    <Redirect
+    to={{
+      pathname: "/login"
+    }}
+  />
   );
+  
 }
