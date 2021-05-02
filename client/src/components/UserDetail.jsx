@@ -44,7 +44,7 @@ export default function UserDetail(props) {
 
   const classes = useStyles();
 
-  const [password, setPassword] = useState();
+  const [password, setPassword] = useState("");
 
   const logoutHandler = e => {
     e.preventDefault();
@@ -68,7 +68,7 @@ export default function UserDetail(props) {
 
   
 
-  if (user) {return (
+  if (props.user) {return (
     <div className={classes.container} >
       <Button
           type="submit"
@@ -83,22 +83,22 @@ export default function UserDetail(props) {
       <Card className={classes.root}>
         <CardActionArea>
           <Typography component="h6" variant="h6">
-            Username: {user.username}
+            Username: {props.user.username}
           </Typography>
         </CardActionArea>
         <CardActionArea>
           <Typography component="h6" variant="h6">
-            Password: {user.password}
+            Password: {props.user.password}
           </Typography>
         </CardActionArea>
         <CardActionArea>
           <Typography component="h6" variant="h6">
-            Age: {user.age}
+            Age: {props.user.age}
           </Typography>
         </CardActionArea>
         <CardActionArea>
           <Typography component="h6" variant="h6">
-            Role: {user.admin ? 'Admin' : 'Regular User'}
+            Role: {props.user.admin ? 'Admin' : 'Regular User'}
           </Typography>
         </CardActionArea>
       </Card>
@@ -116,6 +116,7 @@ export default function UserDetail(props) {
           autoComplete="password"
           autoFocus
           onChange={e => setPassword(e.target.value)}
+          data-testid="password-input"
         />
 
         <Button
@@ -124,12 +125,13 @@ export default function UserDetail(props) {
           variant="contained"
           color="primary"
           className={classes.submit}
+          data-testid="button-input"
         >
           Update Password
         </Button>
       </form>
     </div>
-  
+
   )};
 
   return (
@@ -139,5 +141,4 @@ export default function UserDetail(props) {
     }}
   />
   );
-  
 }
