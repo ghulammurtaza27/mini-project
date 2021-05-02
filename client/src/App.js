@@ -23,14 +23,8 @@ const App = () => {
         <Login />  
       </Route>
       <ProtectedRoute users={state.users} exact path="/user-list" component={UserList} />
-      {/* <Route path="/user-list" exact>
-        <UserList users={state.users}/>
-      </Route> */}
       <Route path="/user" exact>
-        <UserDetail user={user}>
-
-        </UserDetail>
-
+        <UserDetail user={user} />
       </Route>
       <Route path="*" component={() => "404 NOT FOUND"} />
       </Switch>
