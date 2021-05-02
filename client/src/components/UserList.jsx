@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -12,6 +13,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: theme.spacing(8),
+  },
+  root: {
+    width: '100%',
+    maxWidth: 600,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
   
 }));
@@ -35,7 +43,7 @@ export default function UserList(props) {
         </Typography>
       { user && user.admin && state.users.map((user) => {
       if(!user.is_admin) {
-        return <UserCard key={user._id} user={user}/>
+        return (<List component="nav" className={classes.root} aria-label="contacts"><UserCard key={user._id} user={user}/></List>)
       }
       return null;
       })}

@@ -12,7 +12,7 @@ import { Redirect } from "react-router-dom";
 import Typography from '@material-ui/core/Typography';
 
 
-import { updatePassword } from "../features/userSlice";
+import { updatePassword, logout } from "../features/userSlice";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +46,11 @@ export default function UserDetail(props) {
 
   const [password, setPassword] = useState();
 
+  const logoutHandler = e => {
+    e.preventDefault();
+    dispatch(logout())
+  }
+
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -65,6 +70,16 @@ export default function UserDetail(props) {
 
   if (user) {return (
     <div className={classes.container} >
+      <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+          className={classes.submit}
+          onClick={logoutHandler}
+        >
+          Log out
+        </Button>
       <Card className={classes.root}>
         <CardActionArea>
           <Typography component="h6" variant="h6">

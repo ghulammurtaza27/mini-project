@@ -54,8 +54,9 @@ export default function UserCard(props) {
     <div onClick={handleSubmit} className={classes.container}>
       <List component="nav" className={classes.root} aria-label="contacts">
         <ListItem button>
-          <ListItemText primary={props.user.username} />
+          <ListItemText primary={`User: ${props.user.username}`} secondary={`Age: ${props.user.age}`} />
         </ListItem>
+       
       </List>
     </div>
   );
