@@ -62,5 +62,5 @@ router.put("/update", updateUser);
 router.get("/:id", getUserById);
 router.post("/", createUser);
 
-module.exports = userRrouter = router;
+module.exports = userRouter = router;
 // export { router as userRoutes };
