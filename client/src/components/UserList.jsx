@@ -35,7 +35,7 @@ export default function UserList(props) {
         </Typography>
       { user && user.admin && state.users.map((user) => {
       if(!user.is_admin) {
-        return <UserCard key={user.id} user={user}/>
+        return <UserCard key={user._id} user={user}/>
       }
       return null;
       })}

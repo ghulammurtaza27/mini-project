@@ -30,12 +30,12 @@ export default function UserCard(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("clicked", props.user.id);
-    axios.get(`/api/users/${props.user.id}`)
+    console.log("clicked", props.user._id);
+    axios.get(`/api/users/${props.user._id}`)
       .then((res) => {
         console.log(res.data);
         dispatch(login({
-          id: res.data.id,
+          _id: res.data._id,
           username: res.data.username,
           password: res.data.password,
           age: res.data.age,
@@ -43,6 +43,9 @@ export default function UserCard(props) {
         }))
         history.push('/user')
       })
+
+      
+      
   }
 
   

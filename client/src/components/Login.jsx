@@ -84,10 +84,11 @@ export default function Login() {
     axios.get('/api/users')
       .then((res) => {
         console.log(res.data)
+        // axios.post(`/api/users/`, { username: 'princess', password: 'test', age: 5, is_admin: false})
         for (let singleUser of res.data) {
           if(singleUser.username === username && singleUser.password === password) {
             dispatch(login({
-              id: singleUser.id,
+              _id: singleUser._id,
               username: username,
               password: password,
               age: singleUser.age,

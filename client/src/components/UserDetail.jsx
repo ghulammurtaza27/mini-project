@@ -53,12 +53,12 @@ export default function UserDetail(props) {
     // }))
 
     // console.log(user);
+    console.log('yeh kiya hai', user)
 
-
-    axios.put('/api/users/update', { password: password, id: user.id})
+    axios.put('/api/users/update', { password: password, _id: user._id})
       .then((res) => {
         dispatch(updatePassword({
-          password: res.data.password
+          password: password
         }))
       })
   }
