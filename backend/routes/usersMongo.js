@@ -13,6 +13,19 @@ const getUsers = (req, res) => {
   });
 };
 
+const createUser = async (req, res) => {
+  const userInfo = req.body;
+
+  User.create(userInfo, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+   
+};
+
 
 
 const getUserById = (req, res) => {
@@ -47,6 +60,7 @@ const updateUser = (req, res) => {
 router.get("/", getUsers);
 router.put("/update", updateUser);
 router.get("/:id", getUserById);
+router.post("/", createUser);
 
 module.exports = userRrouter = router;
 // export { router as userRoutes };
