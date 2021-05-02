@@ -11,10 +11,7 @@ import store from "../app/store"
 afterEach(cleanup);
 
 
-describe("Application", () => {
-
-  
-
+describe("UserDetails", () => {
 
   it("enters a new password and checks if it updated on the screen", async () => {
 
@@ -36,8 +33,6 @@ describe("Application", () => {
     fireEvent.change(getByTestId("password-input").querySelector('input'), {
       target: {value: "testing"}
     });
-
-   
     expect(getByTestId("password-input").querySelector('input')).toHaveValue('testing');
 
   });
