@@ -19,7 +19,7 @@ module.exports = ({
     
 
     router.put('/update', (req, res) => {
-        const { password, id } = req.body;
+        //const { password, id } = req.body;
         updatePassword(password, id)
             .then((users) => res.json(users))
             .catch((err) => res.json({
