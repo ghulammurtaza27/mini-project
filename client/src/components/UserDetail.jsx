@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { Redirect } from "react-router-dom";
+import Typography from '@material-ui/core/Typography';
 
 
 import { updatePassword } from "../features/userSlice";
@@ -66,18 +67,25 @@ export default function UserDetail(props) {
     <div className={classes.container} >
       <Card className={classes.root}>
         <CardActionArea>
-          <h3>Username: {user.username}</h3>
+          <Typography component="h6" variant="h6">
+            Username: {user.username}
+          </Typography>
         </CardActionArea>
         <CardActionArea>
-        <h3>Password: {user.password}</h3>
+          <Typography component="h6" variant="h6">
+            Password: {user.password}
+          </Typography>
         </CardActionArea>
         <CardActionArea>
-        <h3>Age: {user.age}</h3>
+          <Typography component="h6" variant="h6">
+            Age: {user.age}
+          </Typography>
         </CardActionArea>
         <CardActionArea>
-        <h3>Role: {user.admin ? 'Admin' : 'Regular User'}</h3>
+          <Typography component="h6" variant="h6">
+            Role: {user.admin ? 'Admin' : 'Regular User'}
+          </Typography>
         </CardActionArea>
-
       </Card>
       
       <form className={classes.form} onSubmit={handleSubmit}>
