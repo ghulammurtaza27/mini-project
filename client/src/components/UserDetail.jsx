@@ -48,18 +48,15 @@ export default function UserDetail(props) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // dispatch(updatePassword({
-    //   password: password
-    // }))
 
-    // console.log(user);
-    console.log('yeh kiya hai', user)
+    
 
     axios.put('/api/users/update', { password: password, _id: user._id})
       .then((res) => {
         dispatch(updatePassword({
           password: password
         }))
+        setPassword('');
       })
   }
 
@@ -87,6 +84,7 @@ export default function UserDetail(props) {
         <TextField
           variant="outlined"
           margin="normal"
+          value={password}
           required
           fullWidth
           id="password"

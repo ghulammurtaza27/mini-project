@@ -33,7 +33,6 @@ export default function UserCard(props) {
     console.log("clicked", props.user._id);
     axios.get(`/api/users/${props.user._id}`)
       .then((res) => {
-        console.log(res.data);
         dispatch(login({
           _id: res.data._id,
           username: res.data.username,
